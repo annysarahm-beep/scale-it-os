@@ -458,9 +458,9 @@
             </div>
 <div class="hidden md:flex gap-8 items-center">
 <a class="text-primary font-medium border-b-2 border-primary pb-1 hover:opacity-80 transition-all duration-300 font-body-md text-body-md" href="#"><br></a>
-<a class="text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md" href="#">Solutions</a>
-<a class="text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md" href="#">Features</a>
-<a class="text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md" href="#">About</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md" href="#solutions">Solutions</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md" href="#features">Features</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md" href="#about">About</a>
 </div>
 <div class="hidden md:flex">
 <a href="get-started.html" class="bg-[#0F52BA] hover:bg-[#1E90FF] text-white px-6 py-2.5 rounded font-label-mono text-label-mono transition-all duration-300 shadow-[0_0_15px_rgba(15,82,186,0.5)] hover:shadow-[0_0_25px_rgba(30,144,255,0.7)] active:scale-95 flex items-center gap-2 border border-[#4b8eff]/30 uppercase tracking-wider no-underline">
@@ -715,7 +715,7 @@ animate();
 </div>
 </section>
 <!-- SECTION 2: PROBLEM -->
-<section class="py-32 relative z-20 border-t border-white/5 bg-background">
+<section id="solutions" class="py-32 relative z-20 border-t border-white/5 bg-background">
 <div class="container mx-auto px-margin-mobile md:px-margin-desktop">
 <div class="text-center mb-20 reveal active">
 <h2 class="font-headline-xl text-3xl md:text-headline-xl text-white mb-4">Business shouldn't feel this complicated.</h2>
@@ -749,7 +749,7 @@ animate();
 </div>
 </section>
 <!-- SECTION 3: ONE BUSINESS. ONE SYSTEM -->
-<section class="py-32 relative z-20 bg-surface-dim">
+<section id="features" class="py-32 relative z-20 bg-surface-dim">
 <div class="container mx-auto px-margin-mobile md:px-margin-desktop">
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 <div class="reveal active">
@@ -808,7 +808,7 @@ animate();
 </div>
 </section>
 <!-- Footer -->
-<footer class="bg-background w-full py-16 border-t border-white/5 relative z-20">
+<footer id="about" class="bg-background w-full py-16 border-t border-white/5 relative z-20">
 <div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto gap-gutter">
 <div class="font-headline-sm text-headline-sm font-bold text-on-surface">
                 Scale IT OS
@@ -844,4 +844,10 @@ animate();
             revealOnScroll(); // Trigger once on load
         });
     </script>
+<script src="js/config.js"></script>
+<script src="js/services/storage.js"></script>
+<script src="js/services/auth.js"></script>
+<script src="js/services/entitlements.js"></script>
+<script src="js/components/notifications.js"></script>
+<script src="js/app.js"></script>
 </body></html>
