@@ -7,34 +7,35 @@ const router = express.Router();
 
 router.post('/signup', async (req, res) => {
   try {
-    const { organizationName, ownerEmail, password, industry } = req.body;
+   const { organizationName, adminFullName, ownerEmail, phoneNumber, password } = req.body;
 
-    if (!organizationName || !ownerEmail || !password) {
-      return res.status(400).json({ error: 'organizationName, ownerEmail and password are required' });
-    }
+if (!organizationName || !adminFullName || !ownerEmail || !password) {
+  return res.status(400).json({ error: 'organizationName, adminFullName, ownerEmail and password are required' });
+}
 
-    const { data: newOrg, error: orgError } = await supabase
-      .from('organizations')
-      .insert([{ name: organizationName, owner_email: ownerEmail, industry: industry || null }])
-      .select()
-      .single();
+const { data: newOrg, error: orgError } = await supabase
+  .from('organizations')
+  .insert([{ name: organizationName, owner_email: ownerEmail }])
+  .select()
+  .single();
 
-    if (orgError) return res.status(500).json({ error: orgError.message });
+if (orgError) return res.status(500).json({ error: orgError.message });
 
-    const passwordHash = await bcrypt.hash(password, 10);
+const passwordHash = await bcrypt.hash(password, 10);
 
-    const { data: newUser, error: userError } = await supabase
-      .from('users')
-      .insert([{
-        organization_id: newOrg.id,
-        name: organizationName,
-        email: ownerEmail,
-        password_hash: passwordHash,
-        role: 'organization',
-        role_title: 'Organization Admin'
-      }])
-      .select()
-      .single();
+const { data: newUser, error: userError } = await supabase
+  .from('users')
+  .insert([{
+    organization_id: newOrg.id,
+    name: adminFullName,
+    email: ownerEmail,
+    phone: phoneNumber || null,
+    password_hash: passwordHash,
+    role: 'organization',
+    role_title: 'Organization Admin'
+  }])
+  .select()
+  .single();
 
     if (userError) return res.status(500).json({ error: userError.message });
 
