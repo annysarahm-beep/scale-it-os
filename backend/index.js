@@ -9,8 +9,10 @@ const contactRoutes = require('./routes/contactRoutes');
 const crmCompanyRoutes = require('./routes/crmCompanyRoutes');
 const dealRoutes = require('./routes/dealRoutes');
 const activityRoutes = require('./routes/activityRoutes');
+const cors = require('cors');
 
 const app = express();
+app.use(cors());
 const PORT = 3000;
 
 app.use(express.json());
