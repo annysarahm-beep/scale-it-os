@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html class="dark" lang="en">
 <head>
     <meta charset="utf-8">
@@ -324,7 +324,35 @@
 
     </div>
 
-    <!-- Script Inclusions (Exact Dependency Order) -->
+            <!-- VIEW 3: REAL AI ASSISTANT PANEL -->
+        <section id="crm-view-ai" class="hidden glass-panel p-6 rounded-2xl space-y-4">
+            <div class="flex items-center gap-3 mb-2">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center text-white">
+                    <span class="material-symbols-outlined text-xl">psychology</span>
+                </div>
+                <div>
+                    <h2 class="text-lg font-bold text-white">CRM AI Copilot</h2>
+                    <p class="text-xs text-on-surface-variant">Ask about your leads, deals, and tasks</p>
+                </div>
+            </div>
+
+            <div id="ai-chat-log" class="space-y-3 max-h-[420px] overflow-y-auto custom-scrollbar pr-1 min-h-[120px]">
+                <p class="text-xs text-on-surface-variant text-center py-6 font-mono">Ask a question to get started, e.g. "Which leads should I follow up today?"</p>
+            </div>
+
+            <div id="ai-error-box" class="hidden text-xs text-red-400 bg-red-500/10 border border-red-500/30 rounded-lg px-4 py-2"></div>
+
+            <form id="ai-chat-form" class="flex items-center gap-2 pt-2">
+                <input id="ai-chat-input" type="text" placeholder="Ask your CRM assistant..."
+                    class="flex-1 px-4 py-2.5 rounded-lg bg-white/5 border border-white/10 text-sm text-white placeholder:text-on-surface-variant focus:outline-none focus:border-purple-500/50" />
+                <button id="ai-chat-send" type="submit"
+                    class="px-5 py-2.5 rounded-lg bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white font-mono text-xs uppercase tracking-wider transition-all disabled:opacity-50">
+                    Send
+                </button>
+            </form>
+        </section>
+
+<!-- Script Inclusions (Exact Dependency Order) -->
     <script src="js/config.js"></script>
     <script src="js/services/storage.js"></script>
     <script src="js/services/auth.js"></script>

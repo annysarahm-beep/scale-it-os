@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Scale IT OS - CRM UI Controller
  * Orchestrates CRM Shell interactions, Overview KPI calculations, module preview states,
  * and entitlement validation strictly through the Phase 1 service layer.
@@ -86,7 +86,7 @@ window.ScaleIT = window.ScaleIT || {};
 
                 const meterPkgNameEl = document.getElementById('meter-package-name');
                 if (meterPkgNameEl) {
-                    meterPkgNameEl.textContent = `${plan.name} Package • Active`;
+                    meterPkgNameEl.textContent = `${plan.name} Package â€¢ Active`;
                 }
 
                 // Leads Usage
@@ -245,7 +245,7 @@ window.ScaleIT = window.ScaleIT || {};
                                 ${this._escapeHTML(task.title)}
                             </p>
                             <div class="flex items-center gap-2 mt-1.5 font-mono text-[10px] text-on-surface-variant">
-                                <span>📅 ${task.dueDate || 'No date'}</span>
+                                <span>ðŸ“… ${task.dueDate || 'No date'}</span>
                                 <span class="px-1.5 py-0.2 rounded ${priorityColor}">${this._escapeHTML(task.priority || 'Normal')}</span>
                             </div>
                         </div>
@@ -367,6 +367,25 @@ window.ScaleIT = window.ScaleIT || {};
          */
         switchTab(tabKey, targetBtn) {
             this.activeTab = tabKey;
+
+            const aiViewEl = document.getElementById('crm-view-ai');
+            if (tabKey === 'aiAssistant') {
+                document.querySelectorAll('.crm-tab-btn').forEach(b => {
+                    b.classList.remove('active', 'bg-purple-600/30', 'text-white', 'border-purple-500/50', 'shadow-[0_0_15px_rgba(138,43,226,0.3)]');
+                    b.classList.add('text-on-surface-variant', 'border-transparent');
+                });
+                if (targetBtn) {
+                    targetBtn.classList.add('active', 'bg-purple-600/30', 'text-white', 'border-purple-500/50', 'shadow-[0_0_15px_rgba(138,43,226,0.3)]');
+                    targetBtn.classList.remove('text-on-surface-variant', 'border-transparent');
+                }
+                const ovEl = document.getElementById('crm-view-overview');
+                const pvEl = document.getElementById('crm-view-preview');
+                if (ovEl) ovEl.classList.add('hidden');
+                if (pvEl) pvEl.classList.add('hidden');
+                if (aiViewEl) aiViewEl.classList.remove('hidden');
+                return;
+            }
+            if (aiViewEl) aiViewEl.classList.add('hidden');
 
             // Update Tab UI Styles
             document.querySelectorAll('.crm-tab-btn').forEach(btn => {
@@ -514,5 +533,44 @@ window.ScaleIT = window.ScaleIT || {};
     document.addEventListener('DOMContentLoaded', () => {
         window.ScaleIT.CRMController = new CRMController();
         window.ScaleIT.CRMController.init();
+        const aiForm = document.getElementById('ai-chat-form');
+        if (aiForm) {
+            aiForm.addEventListener('submit', async function (e) {
+                e.preventDefault();
+                const input = document.getElementById('ai-chat-input');
+                const sendBtn = document.getElementById('ai-chat-send');
+                const log = document.getElementById('ai-chat-log');
+                const errorBox = document.getElementById('ai-error-box');
+                const question = input.value.trim();
+                if (!question) return;
+                errorBox.classList.add('hidden');
+                sendBtn.disabled = true;
+                sendBtn.textContent = 'Thinking...';
+                const userMsg = document.createElement('div');
+                userMsg.className = 'text-sm text-white bg-purple-600/20 rounded-lg px-4 py-2 ml-auto max-w-[80%] text-right';
+                userMsg.textContent = question;
+                log.appendChild(userMsg);
+                input.value = '';
+                log.scrollTop = log.scrollHeight;
+                const result = await window.ScaleIT.AIService.askAssistant(question);
+                sendBtn.disabled = false;
+                sendBtn.textContent = 'Send';
+                if (result.error) {
+                    errorBox.textContent = result.error;
+                    errorBox.classList.remove('hidden');
+                    return;
+                }
+                if (result.locked) {
+                    errorBox.textContent = result.message;
+                    errorBox.classList.remove('hidden');
+                    return;
+                }
+                const replyMsg = document.createElement('div');
+                replyMsg.className = 'text-sm text-white bg-white/5 border border-white/10 rounded-lg px-4 py-2 max-w-[85%]';
+                replyMsg.textContent = result.reply || result.answer;
+                log.appendChild(replyMsg);
+                log.scrollTop = log.scrollHeight;
+            });
+        }
     });
 })();

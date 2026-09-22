@@ -9,6 +9,7 @@ const contactRoutes = require('./routes/contactRoutes');
 const crmCompanyRoutes = require('./routes/crmCompanyRoutes');
 const dealRoutes = require('./routes/dealRoutes');
 const activityRoutes = require('./routes/activityRoutes');
+const aiRoutes = require('./routes/aiRoutes');
 const cors = require('cors');
 
 const app = express();
@@ -30,6 +31,7 @@ app.use('/contacts', contactRoutes);
 app.use('/companies', crmCompanyRoutes);
 app.use('/deals', dealRoutes);
 app.use('/activities', activityRoutes);
+app.use('/ai', aiRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

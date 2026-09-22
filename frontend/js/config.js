@@ -7,6 +7,7 @@ window.ScaleIT = window.ScaleIT || {};
 
 window.ScaleIT.Config = {
     APP_NAME: 'Scale IT OS',
+    API_BASE: 'http://localhost:3000',
     VERSION: '1.0.0',
     STORAGE_PREFIX: 'scale_it_',
 

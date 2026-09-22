@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.127.0",
     "@supabase/supabase-js": "^2.112.4",
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
